@@ -1,14 +1,36 @@
+'use client';
+import Todo from '@/Components/Todo';
+import { useState } from 'react';
+
 export default function Home() {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+  });
+
+  const onChangeHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormData((form) => ({
+      ...form,
+      [name]: value,
+    }));
+    console.log(formData);
+  };
   return (
     <>
       <form className='flex items-start flex-col gap-2 w-[80%] max-w-[600px] mt-24 px-2 mx-auto'>
         <input
+          value={formData.title}
+          onChange={onChangeHandler}
           className='px-3 py-2 border-2 w-full'
           type='text'
           name='title'
           placeholder='Enter Title'
         />
         <textarea
+          value={formData.description}
+          onChange={onChangeHandler}
           className='px-3 py-2 border-2 w-full'
           name='description'
           placeholder='Enter Description'
@@ -40,39 +62,12 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Apple MacBook Pro 17"
-              </th>
-              <td className='px-6 py-4'>Silver</td>
-              <td className='px-6 py-4'>Laptop</td>
-              <td className='px-6 py-4'>$2999</td>
-            </tr>
-            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Microsoft Surface Pro
-              </th>
-              <td className='px-6 py-4'>White</td>
-              <td className='px-6 py-4'>Laptop PC</td>
-              <td className='px-6 py-4'>$1999</td>
-            </tr>
-            <tr className='bg-white dark:bg-gray-800'>
-              <th
-                scope='row'
-                className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'
-              >
-                Magic Mouse 2
-              </th>
-              <td className='px-6 py-4'>Black</td>
-              <td className='px-6 py-4'>Accessories</td>
-              <td className='px-6 py-4'>$99</td>
-            </tr>
+            {' '}
+            <Todo />
+            <Todo />
+            <Todo />
+            <Todo />
+            <Todo />
           </tbody>
         </table>
       </div>
