@@ -29,3 +29,15 @@ export async function DELETE(request) {
 
   return NextResponse.json({ msg: 'Todo Deleted' });
 }
+
+export async function PUT(request) {
+  const mongoId = await request.nextUrl.searchParams.get('mongoId');
+
+  await TodoModel.findByIdAndUpdate(mongoId, {
+    $set: {
+      isCompleted: true,
+    },
+  });
+
+  return NextResponse.json({ msg: 'Todo Completed' });
+}
